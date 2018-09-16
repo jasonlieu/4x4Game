@@ -43,8 +43,8 @@ public class GameplayScene implements Scene{
                 System.out.println("DIFFERENCE  x: " + Xdif + "    y:" + Ydif);
                 if (Math.abs(Xdif) > Math.abs(Ydif)) {
                     if (Math.abs(Xdif) > SWIPE_THRESHOLD) {
-                        if (Xdif > 0) {
-                            if(DownX > WIDTH * 0.22222 && DownX < WIDTH * 0.77774) {
+                        if(DownX > WIDTH * 0.22222 && DownX < WIDTH * 0.77774) {
+                            if (Xdif > 0) {
                                 if (DownY > HEIGHT * 0.5 && DownY < HEIGHT * 0.5 + WIDTH * 0.13888) {
                                     board.swipeRight(0);
                                 } else if (DownY > HEIGHT * 0.5 + WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 2 * WIDTH * 0.13888) {
@@ -55,8 +55,7 @@ public class GameplayScene implements Scene{
                                     board.swipeRight(3);
                                 }
                             }
-                        } else {
-                            if(DownX > WIDTH * 0.22222 && DownX < WIDTH * 0.77774) {
+                            else {
                                 if (DownY > HEIGHT * 0.5 && DownY < HEIGHT * 0.5 + WIDTH * 0.13888) {
                                     board.swipeLeft(0);
                                 } else if (DownY > HEIGHT * 0.5 + WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 2 * WIDTH * 0.13888) {
@@ -71,10 +70,34 @@ public class GameplayScene implements Scene{
                     }
                 }
                 else if (Math.abs(Ydif) > SWIPE_THRESHOLD) {
-                    if (Ydif > 0) {
-                        System.out.println("UP");
-                    } else {
-                        System.out.println("DOWN");
+                    if(DownY > HEIGHT * 0.5 && DownY < HEIGHT * 0.5 + 4 * WIDTH * 0.13888) {
+                        if (Ydif > 0) {
+                            if(DownX > WIDTH * 0.2222 && DownX < WIDTH * 0.3611){
+                                board.swipeUp(0);
+                            }
+                            else if(DownX > WIDTH * 0.3611 && DownX < WIDTH * 0.49998){
+                                board.swipeUp(1);
+                            }
+                            else if(DownX > WIDTH * 0.49998 && DownX < WIDTH * 0.63886){
+                                board.swipeUp(2);
+                            }
+                            else if(DownX > WIDTH * 0.63886 && DownX < WIDTH * 0.77774) {
+                                board.swipeUp(3);
+                            }
+                        } else {
+                            if(DownX > WIDTH * 0.2222 && DownX < WIDTH * 0.3611){
+                                board.swipeDown(0);
+                            }
+                            else if(DownX > WIDTH * 0.3611 && DownX < WIDTH * 0.49998){
+                                board.swipeDown(1);
+                            }
+                            else if(DownX > WIDTH * 0.49998 && DownX < WIDTH * 0.63886){
+                                board.swipeDown(2);
+                            }
+                            else if(DownX > WIDTH * 0.63886 && DownX < WIDTH * 0.77774) {
+                                board.swipeDown(3);
+                            }
+                        }
                     }
                 }
 

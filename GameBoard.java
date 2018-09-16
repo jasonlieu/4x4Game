@@ -27,6 +27,7 @@ public class GameBoard implements GameObject {
     Context context;
 
     int running = 0;
+    boolean play = false;
     Paint text = new Paint();
 
     public GameBoard(Context context){
@@ -101,14 +102,29 @@ public class GameBoard implements GameObject {
 
 
     }
-    public void swipeUp(int column){}
-    public void swipeDown(int column){}
+    public void swipeUp(int column){
+        int tempNum = squareList[0][column].getNum();
+        squareList[0][column].change(squareList[1][column].getNum(), pics[squareList[1][column].getNum()]);
+        squareList[1][column].change(squareList[2][column].getNum(), pics[squareList[2][column].getNum()]);
+        squareList[2][column].change(squareList[3][column].getNum(), pics[squareList[3][column].getNum()]);
+        squareList[3][column].change(tempNum, pics[tempNum]);
+        play = true;
+    }
+    public void swipeDown(int column){
+        int tempNum = squareList[3][column].getNum();
+        squareList[3][column].change(squareList[2][column].getNum(), pics[squareList[2][column].getNum()]);
+        squareList[2][column].change(squareList[1][column].getNum(), pics[squareList[1][column].getNum()]);
+        squareList[1][column].change(squareList[0][column].getNum(), pics[squareList[0][column].getNum()]);
+        squareList[0][column].change(tempNum, pics[tempNum]);
+        play = true;
+    }
     public void swipeRight(int row){
         int tempNum = squareList[row][3].getNum();
         squareList[row][3].change(squareList[row][2].getNum(), pics[squareList[row][2].getNum()]);
         squareList[row][2].change(squareList[row][1].getNum(), pics[squareList[row][1].getNum()]);
         squareList[row][1].change(squareList[row][0].getNum(), pics[squareList[row][0].getNum()]);
         squareList[row][0].change(tempNum, pics[tempNum]);
+        play = true;
     }
     public void swipeLeft(int row){
         int tempNum = squareList[row][0].getNum();
@@ -116,10 +132,12 @@ public class GameBoard implements GameObject {
         squareList[row][1].change(squareList[row][2].getNum(), pics[squareList[row][2].getNum()]);
         squareList[row][2].change(squareList[row][3].getNum(), pics[squareList[row][3].getNum()]);
         squareList[row][3].change(tempNum, pics[tempNum]);
+        play = true;
     }
+    public void checkWin(){}
     @Override
     public void draw(Canvas canvas){
-        canvas.drawText("Score: " + running,((WIDTH/2) - 185),(int)(HEIGHT * 0.25), text);
+        canvas.drawText("Time: " + running,((WIDTH/2) - 185),(int)(HEIGHT * 0.25), text);
         squareList[0][0].draw(canvas);
         squareList[0][1].draw(canvas);
         squareList[0][2].draw(canvas);
@@ -142,7 +160,9 @@ public class GameBoard implements GameObject {
     }
     @Override
     public void update(){
-        running++;
+        if(play) {
+            running++;
+        }
         for(int r = 0; r < 4; r++){
             for(int c = 0; c < 4; c++){
                 squareList[r][c].update();
