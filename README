@@ -22,9 +22,9 @@
  
 9/16
   Integrated swipe between GameplayScene and GameBoard
-  
+  Finished swipe functions
+
 TODO:
-  Swipe functions
   Randomizer at start
   Check win condition
   Timer
