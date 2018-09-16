@@ -1,6 +1,6 @@
 package com.example.jason.a4x4;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;

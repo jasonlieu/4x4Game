@@ -1,5 +1,6 @@
 package com.example.jason.a4x4;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -16,15 +17,14 @@ public class SceneManager {
     public static int WIDTH;
     public static int HEIGHT;
 
-    public SceneManager(){
+    public SceneManager(Context context){
         ACTIVE_SCENE = 0;
         WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
         HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
         scenes.add(new MainMenuScene());
-        scenes.add(new GameplayScene());
+        scenes.add(new GameplayScene(context));
 
     }
-
     public void receiveTouch(MotionEvent event){
         scenes.get(ACTIVE_SCENE).receiveTouch(event);
     }

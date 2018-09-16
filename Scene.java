@@ -1,5 +1,6 @@
 package com.example.jason.a4x4;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
