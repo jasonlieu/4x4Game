@@ -1,1 +1,28 @@
 4x4Game
+
+8/30
+  Start project
+  Created MainActivity, MainThread, GamePanel
+
+9/4
+  Implemented Scenes
+  Created Scenes: GameplayScene, MainMenuScene
+  Created GameObjects: GameBoard, Square
+  Added basic functions to MainMenuScene
+  
+9/14
+  Added GameBoard and Square functions
+  Integrated GameBoard and Square
+  Initialize starting GameBoard
+  Created Drawables
+  
+9/15
+  Added swipe effects: Right, Left
+  Swipe Listener
+  
+TODO:
+  Randomizer at start
+  Check win condition
+  Better MainMenu
+  Theme
+  
