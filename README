@@ -19,10 +19,16 @@
 9/15
   Added swipe effects: Right, Left
   Swipe Listener
+ 
+9/16
+  Integrated swipe between GameplayScene and GameBoard
   
 TODO:
+  Swipe functions
   Randomizer at start
   Check win condition
+  Timer
+  Move count
   Better MainMenu
   Theme
   
