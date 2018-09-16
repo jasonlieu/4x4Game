@@ -124,7 +124,7 @@ public class GameBoard implements GameObject {
         squareList[0][1].draw(canvas);
         squareList[0][2].draw(canvas);
         squareList[0][3].draw(canvas);
-/*
+
         squareList[1][0].draw(canvas);
         squareList[1][1].draw(canvas);
         squareList[1][2].draw(canvas);
@@ -138,7 +138,7 @@ public class GameBoard implements GameObject {
         squareList[3][0].draw(canvas);
         squareList[3][1].draw(canvas);
         squareList[3][2].draw(canvas);
-        squareList[3][3].draw(canvas);*/
+        squareList[3][3].draw(canvas);
     }
     @Override
     public void update(){

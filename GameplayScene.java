@@ -44,9 +44,29 @@ public class GameplayScene implements Scene{
                 if (Math.abs(Xdif) > Math.abs(Ydif)) {
                     if (Math.abs(Xdif) > SWIPE_THRESHOLD) {
                         if (Xdif > 0) {
-                            System.out.println("RIGHT");
+                            if(DownX > WIDTH * 0.22222 && DownX < WIDTH * 0.77774) {
+                                if (DownY > HEIGHT * 0.5 && DownY < HEIGHT * 0.5 + WIDTH * 0.13888) {
+                                    board.swipeRight(0);
+                                } else if (DownY > HEIGHT * 0.5 + WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 2 * WIDTH * 0.13888) {
+                                    board.swipeRight(1);
+                                } else if (DownY > HEIGHT * 0.5 + 2 * WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 3 * WIDTH * 0.13888) {
+                                    board.swipeRight(2);
+                                } else if (DownY > HEIGHT * 0.5 + 3 * WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 4 * WIDTH * 0.13888) {
+                                    board.swipeRight(3);
+                                }
+                            }
                         } else {
-                            System.out.println("LEFT");
+                            if(DownX > WIDTH * 0.22222 && DownX < WIDTH * 0.77774) {
+                                if (DownY > HEIGHT * 0.5 && DownY < HEIGHT * 0.5 + WIDTH * 0.13888) {
+                                    board.swipeLeft(0);
+                                } else if (DownY > HEIGHT * 0.5 + WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 2 * WIDTH * 0.13888) {
+                                    board.swipeLeft(1);
+                                } else if (DownY > HEIGHT * 0.5 + 2 * WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 3 * WIDTH * 0.13888) {
+                                    board.swipeLeft(2);
+                                } else if (DownY > HEIGHT * 0.5 + 3 * WIDTH * 0.13888 && DownY < HEIGHT * 0.5 + 4 * WIDTH * 0.13888) {
+                                    board.swipeLeft(3);
+                                }
+                            }
                         }
                     }
                 }
