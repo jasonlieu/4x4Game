@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -96,11 +95,7 @@ public class GameBoard implements GameObject {
         pics[14] = ContextCompat.getDrawable(context, R.drawable.square_15);
         pics[15] = ContextCompat.getDrawable(context, R.drawable.square_16);
 
-
-
-
-
-
+        randomizeBoard();
     }
     public void swipeUp(int column){
         int tempNum = squareList[0][column].getNum();
@@ -108,7 +103,6 @@ public class GameBoard implements GameObject {
         squareList[1][column].change(squareList[2][column].getNum(), pics[squareList[2][column].getNum()]);
         squareList[2][column].change(squareList[3][column].getNum(), pics[squareList[3][column].getNum()]);
         squareList[3][column].change(tempNum, pics[tempNum]);
-        play = true;
     }
     public void swipeDown(int column){
         int tempNum = squareList[3][column].getNum();
@@ -116,7 +110,6 @@ public class GameBoard implements GameObject {
         squareList[2][column].change(squareList[1][column].getNum(), pics[squareList[1][column].getNum()]);
         squareList[1][column].change(squareList[0][column].getNum(), pics[squareList[0][column].getNum()]);
         squareList[0][column].change(tempNum, pics[tempNum]);
-        play = true;
     }
     public void swipeRight(int row){
         int tempNum = squareList[row][3].getNum();
@@ -124,7 +117,6 @@ public class GameBoard implements GameObject {
         squareList[row][2].change(squareList[row][1].getNum(), pics[squareList[row][1].getNum()]);
         squareList[row][1].change(squareList[row][0].getNum(), pics[squareList[row][0].getNum()]);
         squareList[row][0].change(tempNum, pics[tempNum]);
-        play = true;
     }
     public void swipeLeft(int row){
         int tempNum = squareList[row][0].getNum();
@@ -132,9 +124,40 @@ public class GameBoard implements GameObject {
         squareList[row][1].change(squareList[row][2].getNum(), pics[squareList[row][2].getNum()]);
         squareList[row][2].change(squareList[row][3].getNum(), pics[squareList[row][3].getNum()]);
         squareList[row][3].change(tempNum, pics[tempNum]);
+    }
+    public void startGame(){
         play = true;
     }
-    public void checkWin(){}
+    public void stopGame(){
+        play = false;
+    }
+    public boolean checkWin(){
+        for(int i = 0 ; i <= 15; i++){
+            if(squareList[i/4][i%4].getNum() != i){return false;}
+        }
+        return true;
+    }
+    public void randomizeBoard(){
+        int ranMoves = randomInt.nextInt(50) + 25;
+        for(int i = 0; i <  ranMoves; i++){
+            int ranSwipe = randomInt.nextInt(4);
+            final int ranLine = randomInt.nextInt(4);
+            switch(ranSwipe){
+                case 0:
+                    swipeUp(ranLine);
+                    break;
+                case 1:
+                    swipeDown(ranLine);
+                    break;
+                case 2:
+                    swipeRight(ranLine);
+                    break;
+                case 3:
+                    swipeLeft(ranLine);
+                    break;
+            }
+        }
+    }
     @Override
     public void draw(Canvas canvas){
         canvas.drawText("Time: " + running,((WIDTH/2) - 185),(int)(HEIGHT * 0.25), text);
