@@ -24,10 +24,12 @@
   Integrated swipe between GameplayScene and GameBoard
   Finished swipe functions
 
+9/25
+  Finished Randomize
+  Finished CheckWin
+  Updated Timer
+  
 TODO:
-  Randomizer at start
-  Check win condition
-  Timer
   Move count
   Better MainMenu
   Theme
