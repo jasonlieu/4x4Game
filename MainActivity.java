@@ -8,13 +8,26 @@ import android.view.WindowManager;
 
 public class MainActivity extends Activity {
 
+    GamePanel gamePanel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(new GamePanel(MainActivity.this));
+        gamePanel = new GamePanel(MainActivity.this);
+        setContentView(gamePanel);
     }
-
+    @Override
+    protected void onStop(){
+        super.onStop();
+        System.out.println("STOP");
+        gamePanel.StopThread();
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        gamePanel.ResumeThread();
+        System.out.println("RESUME");
+    }
 }

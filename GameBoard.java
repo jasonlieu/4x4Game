@@ -23,6 +23,7 @@ public class GameBoard implements GameObject {
     Random randomInt = new Random();
     Rect positions[][] = new Rect[4][4];
     Drawable pics[] = new Drawable[16];
+    Drawable border;
     Context context;
 
     int running = 0;
@@ -31,7 +32,7 @@ public class GameBoard implements GameObject {
 
     public GameBoard(Context context){
         this.context = context;
-        text.setColor(Color.WHITE);
+        text.setColor(Color.BLACK);
         text.setTextSize(100);
         text.setStyle(Paint.Style.FILL);
 
@@ -94,6 +95,9 @@ public class GameBoard implements GameObject {
         pics[13] = ContextCompat.getDrawable(context, R.drawable.square_14);
         pics[14] = ContextCompat.getDrawable(context, R.drawable.square_15);
         pics[15] = ContextCompat.getDrawable(context, R.drawable.square_16);
+
+        border = ContextCompat.getDrawable(context, R.drawable.border);
+        border.setBounds(new Rect((int)(WIDTH*0.22222 - WIDTH*0.13888/2),(int)(HEIGHT * 0.5 - WIDTH*0.13888/2),(int)(WIDTH*0.63886 + WIDTH*0.13888 + WIDTH*0.13888/2),(int)(HEIGHT * 0.5 + (4*WIDTH*0.13888) +WIDTH*0.13888/2)));
 
         randomizeBoard();
     }
@@ -161,6 +165,7 @@ public class GameBoard implements GameObject {
     @Override
     public void draw(Canvas canvas){
         canvas.drawText("Time: " + running,((WIDTH/2) - 185),(int)(HEIGHT * 0.25), text);
+        border.draw(canvas);
         squareList[0][0].draw(canvas);
         squareList[0][1].draw(canvas);
         squareList[0][2].draw(canvas);

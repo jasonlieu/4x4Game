@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 
 public class SceneManager {
-    private ArrayList<Scene> scenes = new ArrayList<Scene>();
+    private ArrayList<Scene> scenes = new ArrayList<>();
     public static int ACTIVE_SCENE;
     public static int WIDTH;
     public static int HEIGHT;
