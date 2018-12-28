@@ -2,7 +2,6 @@ package com.example.jason.a4x4;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -30,19 +29,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         @Override
         public void surfaceCreated(SurfaceHolder holder){
             thread = new MainThread(getHolder(), this);
-            thread.setRunning(true);
-            thread.start();
+            if (thread != null) {
+                thread.setRunning(true);
+                thread.start();
+            }
+
         }
 
         @Override
         public void surfaceDestroyed(SurfaceHolder holder){
-            boolean retry = true;
-            while(true){
-                try {
-                    thread.setRunning(false);
-                    thread.join();
-                } catch(Exception e) {e.printStackTrace();}
+            if (thread != null) {
+                thread.setRunning(false);
             }
+
         }
         @Override
         public boolean onTouchEvent(MotionEvent event){
@@ -59,16 +58,4 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             super.draw(canvas);
             manager.draw(canvas);
         }
-        public void StopThread() {
-            System.out.print("STOP");
-            if (thread != null) {
-                thread.setRunning(false);
-            }
-        }
-    public void ResumeThread() {
-        System.out.print("RESUME");
-        if (thread != null) {
-            thread.setRunning(true);
-        }
-    }
 }
