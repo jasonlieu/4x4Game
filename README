@@ -28,7 +28,10 @@
   Finished Randomize
   Finished CheckWin
   Updated Timer
-  
+
+12/27
+  Changed MainActivity and GamePanel to not crash on resume
+
 TODO:
   Move count
   Better MainMenu
