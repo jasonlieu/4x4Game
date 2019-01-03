@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 
 import static com.example.jason.a4x4.SceneManager.HEIGHT;
@@ -16,15 +18,20 @@ import static com.example.jason.a4x4.SceneManager.WIDTH;
  */
 
 public class GameplayScene implements Scene{
-    GameBoard board;
+
+    private Rect bgBounds = new Rect(0, 0, WIDTH, HEIGHT);
+    private Drawable bg;
+    private GameBoard board;
     private static final int SWIPE_THRESHOLD = 100;
-    float DownX = 0, DownY = 0;
-    boolean win;
-    Paint winScreenColor = new Paint();
-    Rect winScreen = new Rect(0,0, WIDTH, HEIGHT);
+    private float DownX = 0, DownY = 0;
+    private boolean win;
+    private Paint winScreenColor = new Paint();
+    private Rect winScreen = new Rect(0,0, WIDTH, HEIGHT);
 
 
     GameplayScene(Context context){
+        bg = ContextCompat.getDrawable(context, R.drawable.test_bg);
+        bg.setBounds(bgBounds);
         board = new GameBoard(context);
         win = false;
         //win = true;
@@ -123,7 +130,8 @@ public class GameplayScene implements Scene{
 
     @Override
     public void draw(Canvas canvas){
-        canvas.drawColor(Color.WHITE);
+        //canvas.drawColor(Color.parseColor("#444070")); //#444070
+        bg.draw(canvas);
         board.draw(canvas);
         if(win){
             canvas.drawRect( winScreen, winScreenColor);

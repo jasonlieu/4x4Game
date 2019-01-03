@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 
 import static com.example.jason.a4x4.SceneManager.HEIGHT;
@@ -14,9 +17,13 @@ import static com.example.jason.a4x4.SceneManager.WIDTH;
  */
 
 public class MainMenuScene implements Scene {
-    Paint text = new Paint();
+    private Paint text = new Paint();
+    private Rect bgBounds = new Rect(0, 0, WIDTH, HEIGHT);
+    private Drawable bg;
 
-    MainMenuScene(){
+    MainMenuScene(Context context){
+        bg = ContextCompat.getDrawable(context, R.drawable.test_bg);
+        bg.setBounds(bgBounds);
         text.setColor(Color.BLACK);
         text.setTextSize(100);
         text.setStyle(Paint.Style.FILL);
@@ -44,7 +51,8 @@ public class MainMenuScene implements Scene {
 
     @Override
     public void draw(Canvas canvas){
-        canvas.drawColor(Color.LTGRAY);
+        //canvas.drawColor(Color.LTGRAY);
+        bg.draw(canvas);
         canvas.drawText("mainmenu",(int)(WIDTH * 0.5)-250,(int)(HEIGHT * 0.3), text);
         canvas.drawText("playButton",(WIDTH/2 - 250), (int)(HEIGHT * 0.7),text);
     }
