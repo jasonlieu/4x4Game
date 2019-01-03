@@ -32,6 +32,10 @@
 12/27
   Changed MainActivity and GamePanel to not crash on resume
 
+1/2
+  Add background to MainMenuScene and GameplayScene
+  Made squares look nice
+
 TODO:
   Move count
   Better MainMenu
