@@ -36,8 +36,11 @@
   Add background to MainMenuScene and GameplayScene
   Made squares look nice
 
+1/4
+  Add reset button and functionality
+
 TODO:
   Move count
   Better MainMenu
-  Theme
-  
+  Store best score
+  Use seconds as score  
