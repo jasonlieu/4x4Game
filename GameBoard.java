@@ -26,9 +26,10 @@ public class GameBoard implements GameObject {
     Drawable border;
     Context context;
 
-    int running = 0;
+    long timeElapsed = 0;
     boolean play = false;
     Paint text = new Paint();
+    long time;
 
     public GameBoard(Context context){
         this.context = context;
@@ -131,6 +132,7 @@ public class GameBoard implements GameObject {
     }
     public void startGame(){
         play = true;
+        time = System.currentTimeMillis()/1000;
     }
     public void stopGame(){
         play = false;
@@ -164,8 +166,8 @@ public class GameBoard implements GameObject {
     }
     @Override
     public void draw(Canvas canvas){
-        canvas.drawText("Time: " + running,((WIDTH/2) - 185),(int)(HEIGHT * 0.25), text);
-        border.draw(canvas);
+        canvas.drawText(""+ timeElapsed,((WIDTH/2)),(int)(HEIGHT * 0.25), text);
+        //border.draw(canvas);
         squareList[0][0].draw(canvas);
         squareList[0][1].draw(canvas);
         squareList[0][2].draw(canvas);
@@ -189,7 +191,10 @@ public class GameBoard implements GameObject {
     @Override
     public void update(){
         if(play) {
-            running++;
+            if(time != (int)(System.currentTimeMillis()/1000)){
+                time = (int)(System.currentTimeMillis()/1000);
+                timeElapsed++;
+            }
         }
         for(int r = 0; r < 4; r++){
             for(int c = 0; c < 4; c++){
