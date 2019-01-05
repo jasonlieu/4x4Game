@@ -19,6 +19,7 @@ import static com.example.jason.a4x4.SceneManager.WIDTH;
 
 public class GameplayScene implements Scene{
 
+    private Context context;
     private Rect bgBounds = new Rect(0, 0, WIDTH, HEIGHT);
     private Drawable bg;
     private GameBoard board;
@@ -27,11 +28,16 @@ public class GameplayScene implements Scene{
     private boolean win;
     private Paint winScreenColor = new Paint();
     private Rect winScreen = new Rect(0,0, WIDTH, HEIGHT);
+    private Rect resetBound = new Rect((int)(WIDTH * 0.77), (int)(HEIGHT * 0.0263), (int)(WIDTH * 0.95), (int)(HEIGHT * 0.05));
 
+    private Drawable resetButton;
 
     GameplayScene(Context context){
+        this.context = context;
         bg = ContextCompat.getDrawable(context, R.drawable.test_bg);
         bg.setBounds(bgBounds);
+        resetButton = ContextCompat.getDrawable(context, R.drawable.resetbutton);
+        resetButton.setBounds(resetBound);
         board = new GameBoard(context);
         win = false;
         //win = true;
@@ -52,15 +58,12 @@ public class GameplayScene implements Scene{
                 case MotionEvent.ACTION_DOWN:
                     DownX = event.getX();
                     DownY = event.getY();
-                    //System.out.println("CLICK   x: " + DownX + "    y:" +DownY);
                     break;
                 case MotionEvent.ACTION_UP:
                     UpX = event.getX();
                     UpY = event.getY();
-                    //System.out.println("NOCLICK   x: " + UpX + "    y:" +UpY);
                     Ydif = DownY - UpY;
                     Xdif = UpX - DownX;
-                    //System.out.println("DIFFERENCE  x: " + Xdif + "    y:" + Ydif);
                     if (Math.abs(Xdif) > Math.abs(Ydif)) {
                         if (Math.abs(Xdif) > SWIPE_THRESHOLD) {
                             if (DownX > WIDTH * 0.22222 && DownX < WIDTH * 0.77774 && DownY > HEIGHT * 0.5 && DownY < HEIGHT * 0.5 + 4 * WIDTH * 0.13888) {
@@ -123,6 +126,13 @@ public class GameplayScene implements Scene{
                                 win = true;
                             }
                         }
+                    } else if( //reset button
+                            (DownX >= (WIDTH * 0.73) && DownX <= (WIDTH * 0.99)) && //check in resetBounds
+                            (DownY >= (HEIGHT * 0.02) && DownY <= (HEIGHT * 0.06)) &&
+                            (UpX >= (WIDTH * 0.73) && UpX <= (WIDTH * 0.99)) &&
+                            (UpY >= (HEIGHT * 0.02) && UpY <= (HEIGHT * 0.06))
+                            ){
+                                board = new GameBoard(context);
                     }
             }
         }
@@ -130,9 +140,9 @@ public class GameplayScene implements Scene{
 
     @Override
     public void draw(Canvas canvas){
-        //canvas.drawColor(Color.parseColor("#444070")); //#444070
         bg.draw(canvas);
         board.draw(canvas);
+        resetButton.draw(canvas);
         if(win){
             canvas.drawRect( winScreen, winScreenColor);
         }
