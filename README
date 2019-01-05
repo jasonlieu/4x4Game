@@ -39,6 +39,10 @@
 1/4
   Add reset button and functionality
 
+1/5
+  Fixed reset to work after win
+  Added second counter (ugly)
+
 TODO:
   Move count
   Better MainMenu
