@@ -20,7 +20,7 @@ import static com.example.jason.a4x4.SceneManager.WIDTH;
 public class GameplayScene implements Scene{
 
     private Context context;
-    private Rect bgBounds = new Rect(0, 0, WIDTH, HEIGHT);
+    private Rect bgBounds = new Rect(0, 0, WIDTH, HEIGHT +(int)(HEIGHT * 0.075));
     private Drawable bg;
     private GameBoard board;
     private static final int SWIPE_THRESHOLD = 100;
