@@ -43,8 +43,13 @@
   Fixed reset to work after win
   Added second counter (ugly)
 
+1/9
+  Fix background boundary
+  Add playbutton and (nonfunctional) scorebutton
+  
 TODO:
   Move count
   Better MainMenu
   Store best score
-  Use seconds as score  
+  ScoreScene
+  Database for scores + date?
