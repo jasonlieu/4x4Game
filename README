@@ -47,9 +47,12 @@
   Fix background boundary
   Add playbutton and (nonfunctional) scorebutton
   
+1/11
+  Add backbutton
+  Add ScoreScene
+  Add database functionality and DatabaseHelper
+
 TODO:
   Move count
   Better MainMenu
-  Store best score
-  ScoreScene
-  Database for scores + date?
+  Store best score (top 5 + recent 5?)
