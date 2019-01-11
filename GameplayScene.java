@@ -20,6 +20,7 @@ import static com.example.jason.a4x4.SceneManager.WIDTH;
 public class GameplayScene implements Scene{
 
     private Context context;
+    private DatabaseHelper db;
     private Rect bgBounds = new Rect(0, 0, WIDTH, HEIGHT +(int)(HEIGHT * 0.075));
     private Drawable bg;
     private GameBoard board;
@@ -29,18 +30,23 @@ public class GameplayScene implements Scene{
     private Paint winScreenColor = new Paint();
     private Rect winScreen = new Rect(0,0, WIDTH, HEIGHT);
     private Rect resetBound = new Rect((int)(WIDTH * 0.77), (int)(HEIGHT * 0.0263), (int)(WIDTH * 0.95), (int)(HEIGHT * 0.05));
-
     private Drawable resetButton;
+    private Rect backBound = new Rect((int)(WIDTH * 0.05), (int)(HEIGHT * 0.0263), (int)(WIDTH * 0.23), (int)(HEIGHT * 0.05));
+    private Drawable backButton;
+    private boolean postScore;
 
     GameplayScene(Context context){
         this.context = context;
+        db = new DatabaseHelper(context);
         bg = ContextCompat.getDrawable(context, R.drawable.test_bg);
         bg.setBounds(bgBounds);
         resetButton = ContextCompat.getDrawable(context, R.drawable.resetbutton);
         resetButton.setBounds(resetBound);
+        backButton = ContextCompat.getDrawable(context, R.drawable.backutton);
+        backButton.setBounds(backBound);
         board = new GameBoard(context);
         win = false;
-        //win = true;
+        postScore = false;
         winScreenColor.setColor(Color.BLACK);
         winScreenColor.setAlpha(100);
         winScreenColor.setMaskFilter(new BlurMaskFilter(100, BlurMaskFilter.Blur.NORMAL));
@@ -134,6 +140,17 @@ public class GameplayScene implements Scene{
                     ){
                         board = new GameBoard(context);
                         win = false;
+                        postScore = false;
+                }
+                if((DownX >= 0 && DownX <= (WIDTH * 0.28)) &&       //back button
+                        (DownY >= (HEIGHT * 0.02) && DownY <= (HEIGHT * 0.06)) &&
+                        (UpX >= 0 && UpX <= (WIDTH * 0.28)) &&
+                        (UpY >= (HEIGHT * 0.02) && UpY <= (HEIGHT * 0.06))
+                        ){
+                            board = new GameBoard(context);         //also resets game
+                            win = false;
+                            postScore = false;
+                            ChangeToMainMenuScene();
                 }
         }
     }
@@ -142,14 +159,22 @@ public class GameplayScene implements Scene{
     public void draw(Canvas canvas){
         bg.draw(canvas);
         board.draw(canvas);
+        backButton.draw(canvas);
         resetButton.draw(canvas);
         if(win){
             canvas.drawRect( winScreen, winScreenColor);
+            if(!postScore) {        //post only once, until reset
+                db.insert(board.getScore());
+                postScore = true;
+            }
         }
     }
 
     @Override
     public void terminate(){
+        SceneManager.ACTIVE_SCENE = 0;
+    }
+    public void ChangeToMainMenuScene(){
         SceneManager.ACTIVE_SCENE = 0;
     }
 }

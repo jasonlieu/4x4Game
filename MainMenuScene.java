@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 
+import static com.example.jason.a4x4.SceneManager.ACTIVE_SCENE;
 import static com.example.jason.a4x4.SceneManager.HEIGHT;
 import static com.example.jason.a4x4.SceneManager.WIDTH;
 
@@ -59,6 +60,9 @@ public class MainMenuScene implements Scene {
                 {
                     ChangeToPlayScene();
                 }
+                else if(scoreBounds.contains((int)event.getX(), (int)event.getY())){
+                    ChangeToScoreScene();
+                }
         }
     }
 
@@ -74,5 +78,8 @@ public class MainMenuScene implements Scene {
     @Override
     public void terminate(){}
 
-    public void ChangeToPlayScene(){SceneManager.ACTIVE_SCENE = 1;}
+    public void ChangeToPlayScene(){
+        SceneManager.ACTIVE_SCENE = 1;
+    }
+    public void ChangeToScoreScene(){SceneManager.ACTIVE_SCENE = 2;}
 }

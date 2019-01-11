@@ -23,7 +23,6 @@ public class GameBoard implements GameObject {
     Random randomInt = new Random();
     Rect positions[][] = new Rect[4][4];
     Drawable pics[] = new Drawable[16];
-    Drawable border;
     Context context;
 
     long timeElapsed = 0;
@@ -97,9 +96,6 @@ public class GameBoard implements GameObject {
         pics[14] = ContextCompat.getDrawable(context, R.drawable.square_15);
         pics[15] = ContextCompat.getDrawable(context, R.drawable.square_16);
 
-        border = ContextCompat.getDrawable(context, R.drawable.border);
-        border.setBounds(new Rect((int)(WIDTH*0.22222 - WIDTH*0.13888/2),(int)(HEIGHT * 0.5 - WIDTH*0.13888/2),(int)(WIDTH*0.63886 + WIDTH*0.13888 + WIDTH*0.13888/2),(int)(HEIGHT * 0.5 + (4*WIDTH*0.13888) +WIDTH*0.13888/2)));
-
         randomizeBoard();
     }
     public void swipeUp(int column){
@@ -167,7 +163,7 @@ public class GameBoard implements GameObject {
     @Override
     public void draw(Canvas canvas){
         canvas.drawText(""+ timeElapsed,((WIDTH/2)),(int)(HEIGHT * 0.25), text);
-        //border.draw(canvas);
+
         squareList[0][0].draw(canvas);
         squareList[0][1].draw(canvas);
         squareList[0][2].draw(canvas);
@@ -187,6 +183,9 @@ public class GameBoard implements GameObject {
         squareList[3][1].draw(canvas);
         squareList[3][2].draw(canvas);
         squareList[3][3].draw(canvas);
+    }
+    public long getScore(){
+        return timeElapsed;
     }
     @Override
     public void update(){
